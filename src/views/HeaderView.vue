@@ -1,6 +1,6 @@
 <template>
 <nav
-    class="w-full border-b-2 border-tertiary-contrast sticky top-0 bg-card-background-light"
+    class="w-full border-b-2 border-tertiary-contrast sticky top-0 bg-card-background-light bg-white"
 >
     <div class="grid grid-cols-3 items-center h-16">
         <div class="ml-8">
