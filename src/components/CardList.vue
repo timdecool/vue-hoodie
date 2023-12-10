@@ -24,12 +24,12 @@
         }
         return hoodies
     })
-
-
 </script>
 
 <template>
+
     <div id="item-list" class="px-4" v-for="hoodie in hoodies" :key="hoodie.ref">
         <card-item :hoodie="hoodie"/>
     </div>
+    <p v-if="hoodies.length === 0" class="px-4">Aucun résultat pour cette recherche.</p>
 </template>

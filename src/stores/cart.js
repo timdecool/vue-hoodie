@@ -2,13 +2,21 @@ import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 
 export const useCartStore = defineStore('cart', () => {
-  
-
-  const count = ref(0)
-  const doubleCount = computed(() => count.value * 2)
-  function increment() {
-    count.value++
+  const cart = ref([])
+  const change = ref(false)
+  function addArticle(item) {
+    if(item.qty !== 0) {
+      cart.value.push(item);
+      change.value = true
+    }
   }
 
-  return { count, doubleCount, increment }
+  function removeArticle(ref) {
+    let index = cart.value.findIndex((item) => item.ref === ref)
+    if(index > -1) {
+      cart.value.splice(index,1)
+    }
+  }
+
+  return { cart, addArticle, removeArticle, change }
 })

@@ -1,5 +1,8 @@
 <script setup>
 import { ref, computed } from 'vue'
+import { useCartStore } from '@/stores/cart'
+const cartStore = useCartStore()
+
 const props = defineProps({
     hoodie: {
         type: Object,
@@ -21,15 +24,6 @@ const selectedQuantity = ref(0)
 
 const emit = defineEmits(['addToCart'])
 
-function addToCart(ref) {
-    if(selectedQuantity.value !== 0) {
-        emit('addToCart', {
-            "ref": ref,
-            "size": selectedSize,
-            "qty": selectedQuantity
-        })
-    }
-}
 
 
 
@@ -96,7 +90,11 @@ function addToCart(ref) {
                 <button
                     type="button"
                     class="inline-block rounded border-2 bg-tertiary-contrast text-card-background-light border-button-text px-6 pt-2 pb-2 text-xs font-medium uppercase leading-normal text-info w-44"
-                    @click="addToCart(hoodie.ref)"
+                    @click="cartStore.addArticle({
+                        'ref': hoodie.ref,
+                        'size': hoodie.availableSize[selectedSize],
+                        'qty': selectedQuantity
+                    })"
                 >
                     ADD TO CART
                     <svg
